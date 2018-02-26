@@ -28,4 +28,8 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.+'
     testCompile 'junit:junit:4.12'
+    //baseAdapter
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    //日志打印
+    compile 'com.orhanobut:logger:2.1.1'
 }

@@ -3,9 +3,10 @@ package com.gyq.fast.gyq_common.configure;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 
-import com.gyq.fast.gyq_common.BuildConfig;
+import com.gyq.fast.gyq_common.base.ActivityManager;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -21,94 +22,29 @@ import java.util.List;
  * @since 1.0
  */
 
-public class BaseApplication extends Application {
-    private static final String TAG = "BaseApplication";
+public class CommonBaseApplication extends Application {
+    private static final String TAG = "CommonBaseApplication";
+    private static final Boolean DEBUG = true;
+    private static CommonBaseApplication mInstance;
 
-    private static BaseApplication mInstance;
-    public List<Activity> undestroyActivities;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        // 初始化 Logger 配置
         mInstance = this;
-        undestroyActivities = new ArrayList<>();
-
+        registActivityLifecycle();
         initLogger();
     }
 
 
-    public static BaseApplication getBaseApplication() {
+    public static CommonBaseApplication getBaseApplication() {
         return mInstance;
     }
 
-    public void addActivity(Activity activity) {
-        undestroyActivities.add(activity);
-    }
+    public static Boolean isDebug(){return DEBUG;}
 
-    public void removeActivity(Activity activity) {
-        undestroyActivities.remove(activity);
-    }
-
-    /**
-     * 未销毁activity中是否包含clzz
-     */
-    public boolean isContainActivity(Class clzz) {
-        for (Activity activity : undestroyActivities) {
-            if (activity.getClass() == clzz) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 退出登录后需finsh所有activity
-     */
-    public void finishAllActivity() {
-        for (Activity activity : undestroyActivities) {
-            if (activity != null) {
-                activity.finish();
-            }
-        }
-    }
-
-    /**
-     * finish指定activity
-     *
-     * @param clzz
-     */
-    public void finishActivity(Class clzz) {
-        for (Activity activity : undestroyActivities) {
-            if (activity.getClass() == clzz) {
-                activity.finish();
-            }
-        }
-    }
-
-    /**
-     * 判断Activity任务栈中是否包含指定的Activity
-     *
-     * @param clzz 目标Activity
-     * @return -1，当app被系统回收后任务栈只包含前台Acitivty,状态不明
-     * <p>0，任务栈中不包含指定Activity
-     * <p>1，任务栈中包含指定Activity
-     */
-    public int containsActivity(Class clzz) {
-        if (undestroyActivities.size() <= 1) {
-            return -1;
-        }
-
-        for (Activity activity : undestroyActivities) {
-            if (activity.getClass() == clzz) {
-                return 1;
-            }
-        }
-
-        return 0;
-    }
-    
     /**
      * 初始化 Logger 配置
      *
@@ -141,8 +77,7 @@ public class BaseApplication extends Application {
 
     /**
      * 注册监听 Activity 生命周期
-     * 在每个 Activity 创建时需要进行的操作，比如 Stack<Activity> 管理
-     *
+     * 在每个 Activity 创建时需要进行的操作，比如 Stack<Activity> 管理,也能对第三方的 Activity 进行管理
      * @see Application
      * @since 1.0
      */
@@ -151,36 +86,38 @@ public class BaseApplication extends Application {
             @Override
             public void onActivityCreated(Activity activity, Bundle bundle) {
                 Log.e(TAG, "onActivityCreated: " + activity.getLocalClassName());
+                ActivityManager.getInstance().addActivity(activity);
             }
 
             @Override
             public void onActivityStarted(Activity activity) {
-                Log.e(TAG, "onActivityStarted: " + activity.getLocalClassName());
+                //Log.e(TAG, "onActivityStarted: " + activity.getLocalClassName());
             }
 
             @Override
             public void onActivityResumed(Activity activity) {
-                Log.e(TAG, "onActivityResumed: " + activity.getLocalClassName());
+               // Log.e(TAG, "onActivityResumed: " + activity.getLocalClassName());
             }
 
             @Override
             public void onActivityPaused(Activity activity) {
-                Log.e(TAG, "onActivityPaused: " + activity.getLocalClassName());
+                //Log.e(TAG, "onActivityPaused: " + activity.getLocalClassName());
             }
 
             @Override
             public void onActivityStopped(Activity activity) {
-                Log.e(TAG, "onActivityStopped: " + activity.getLocalClassName());
+//                Log.e(TAG, "onActivityStopped: " + activity.getLocalClassName());
             }
 
             @Override
             public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-                Log.e(TAG, "onActivitySaveInstanceState: " + activity.getLocalClassName());
+//                Log.e(TAG, "onActivitySaveInstanceState: " + activity.getLocalClassName());
             }
 
             @Override
             public void onActivityDestroyed(Activity activity) {
                 Log.e(TAG, "onActivityDestroyed: " + activity.getLocalClassName());
+                ActivityManager.getInstance().removeActivity(activity);
             }
         });
     }

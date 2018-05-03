@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gyq.fast.gyq_common.base.CommonBaseActivity;
+import com.gyq.fast.gyq_common.utils.ToastUtil;
 
 import butterknife.BindView;
 
@@ -29,9 +30,6 @@ public class MainActivity extends CommonBaseActivity implements BottomNavigation
     LinearLayout llRoot;
 
 
-//    private BottomNavigationView navigation;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +44,11 @@ public class MainActivity extends CommonBaseActivity implements BottomNavigation
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initView() {
-//        navigation = (BottomNavigationView) findViewById(R.id.navigation);
-
         //改变图标和字体颜色
         ColorStateList csl1 = getResources().getColorStateList(R.color.index_color_status_list, getTheme());
         navigation.setItemTextColor(csl1);
         navigation.setItemIconTintList(csl1);
-//        navigation.setOnNavigationItemSelectedListener(this);
+        navigation.setOnNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -62,16 +58,16 @@ public class MainActivity extends CommonBaseActivity implements BottomNavigation
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        item.setChecked(true);//不设置的话一直是第一个处于被选状态，但是其他是可以被点击的
         switch (item.getItemId()){
             case R.id.action_index:
-                item.setIcon(R.drawable.index_active);
-
+                ToastUtil.showLong("action_index");
                 break;
             case R.id.action_message:
-
+                ToastUtil.showLong("action_message");
                 break;
             case R.id.action_my:
-
+                ToastUtil.showLong("action_my");
                 break;
             default:
                 break;

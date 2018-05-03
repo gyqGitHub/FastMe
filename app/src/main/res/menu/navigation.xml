@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_index"
         android:enabled="true"
-        android:icon="@drawable/index_icon_status_list"
+        android:icon="@drawable/index"
         android:title="首页"
         app:showAsAction="ifRoom" />
     <item

@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.gyq.fast.gyq_common.configure.CommonBaseApplication;
+
 /**
 * Toast 统一管理类
 *@author Created by gyq on 2018/4/28.
@@ -42,13 +44,12 @@ public class ToastUtil {
     /**
      * 短时间显示Toast
      *
-     * @param context
      * @param message
      */
-    public static void showShort(Context context, CharSequence message) {
+    public static void showShort( CharSequence message) {
         if (isShow){
             if (mToast == null) {
-                mToast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(CommonBaseApplication.getBaseApplication(), message, Toast.LENGTH_SHORT);
             } else {
                 mToast.setText(message);
             }
@@ -59,13 +60,12 @@ public class ToastUtil {
     /**
      * 短时间显示Toast
      *
-     * @param context
      * @param resId 资源ID:getResources().getString(R.string.xxxxxx);
      */
-    public static void showShort(Context context, int resId) {
+    public static void showShort( int resId) {
         if (isShow){
             if (mToast == null) {
-                mToast = Toast.makeText(context, resId, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(CommonBaseApplication.getBaseApplication(), resId, Toast.LENGTH_SHORT);
             } else {
                 mToast.setText(resId);
             }
@@ -76,13 +76,12 @@ public class ToastUtil {
     /**
      * 长时间显示Toast
      *
-     * @param context
      * @param message
      */
-    public static void showLong(Context context, CharSequence message) {
+    public static void showLong( CharSequence message) {
         if (isShow){
             if (mToast == null) {
-                mToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+                mToast = Toast.makeText(CommonBaseApplication.getBaseApplication(), message, Toast.LENGTH_LONG);
             } else {
                 mToast.setText(message);
             }
@@ -93,13 +92,12 @@ public class ToastUtil {
     /**
      * 长时间显示Toast
      *
-     * @param context
      * @param resId 资源ID:getResources().getString(R.string.xxxxxx);
      */
-    public static void showLong(Context context, int resId) {
+    public static void showLong( int resId) {
         if (isShow){
             if (mToast == null) {
-                mToast = Toast.makeText(context, resId, Toast.LENGTH_LONG);
+                mToast = Toast.makeText(CommonBaseApplication.getBaseApplication(), resId, Toast.LENGTH_LONG);
             } else {
                 mToast.setText(resId);
             }
@@ -110,14 +108,13 @@ public class ToastUtil {
     /**
      * 自定义显示Toast时间
      *
-     * @param context
      * @param message
      * @param duration 单位:毫秒
      */
-    public static void show(Context context, CharSequence message, int duration) {
+    public static void show( CharSequence message, int duration) {
         if (isShow){
             if (mToast == null) {
-                mToast = Toast.makeText(context, message, duration);
+                mToast = Toast.makeText(CommonBaseApplication.getBaseApplication(), message, duration);
             } else {
                 mToast.setText(message);
             }
@@ -128,14 +125,13 @@ public class ToastUtil {
     /**
      * 自定义显示Toast时间
      *
-     * @param context
      * @param resId 资源ID:getResources().getString(R.string.xxxxxx);
      * @param duration 单位:毫秒
      */
-    public static void show(Context context, int resId, int duration) {
+    public static void show( int resId, int duration) {
         if (isShow){
             if (mToast == null) {
-                mToast = Toast.makeText(context, resId, duration);
+                mToast = Toast.makeText(CommonBaseApplication.getBaseApplication(), resId, duration);
             } else {
                 mToast.setText(resId);
             }
@@ -145,15 +141,14 @@ public class ToastUtil {
 
     /**
      * 自定义Toast的View
-     * @param context
      * @param message
      * @param duration 单位:毫秒
      * @param view 显示自己的View
      */
-    public static void customToastView(Context context, CharSequence message, int duration,View view) {
+    public static void customToastView(CharSequence message, int duration,View view) {
         if (isShow){
             if (mToast == null) {
-                mToast = Toast.makeText(context, message, duration);
+                mToast = Toast.makeText(CommonBaseApplication.getBaseApplication(), message, duration);
             } else {
                 mToast.setText(message);
             }
@@ -166,17 +161,16 @@ public class ToastUtil {
 
     /**
      * 自定义Toast的位置
-     * @param context
      * @param message
      * @param duration 单位:毫秒
      * @param gravity
      * @param xOffset
      * @param yOffset
      */
-    public static void customToastGravity(Context context, CharSequence message, int duration,int gravity, int xOffset, int yOffset) {
+    public static void customToastGravity( CharSequence message, int duration,int gravity, int xOffset, int yOffset) {
         if (isShow){
             if (mToast == null) {
-                mToast = Toast.makeText(context, message, duration);
+                mToast = Toast.makeText(CommonBaseApplication.getBaseApplication(), message, duration);
             } else {
                 mToast.setText(message);
             }

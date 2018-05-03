@@ -15,6 +15,6 @@ import android.widget.ImageView;
 public class ImageLoader {
 
     public void loadImage(Context context, String url, ImageView imageView){
-            GlideApp.with(context);
+        GlideApp.with(context).load(url).into(imageView);
     }
 }

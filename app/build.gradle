@@ -1,15 +1,17 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
     defaultConfig {
-        applicationId "com.gyq.fast.fastme"
-        minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.android["applicationId"]
+
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
@@ -35,10 +37,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
     compile project(':gyq_common')
 
+    compile rootProject.ext.dependencies["constraint"]
 
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'cn.jzvd:jiaozivideoplayer:6.2.9'
+
+    //不引入注解，butterknife 会获取的 view 会报空指针异常，而 Glide 会找不到 GlideApp
+//    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+
 }

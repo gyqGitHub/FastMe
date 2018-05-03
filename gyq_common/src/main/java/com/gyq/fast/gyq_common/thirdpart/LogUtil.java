@@ -1,4 +1,4 @@
-package com.gyq.fast.gyq_common.utils;
+package com.gyq.fast.gyq_common.thirdpart;
 
 import com.gyq.fast.gyq_common.configure.CommonBaseApplication;
 import com.orhanobut.logger.Logger;

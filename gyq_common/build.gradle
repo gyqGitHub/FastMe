@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -26,13 +26,24 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.+'
     testCompile 'junit:junit:4.12'
+    compile rootProject.ext.dependencies["appcompat-v7"]
     //baseAdapter
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    compile rootProject.ext.dependencies["recyclerViewAdapter"]
     //日志打印
-    compile 'com.orhanobut:logger:2.1.1'
+    compile rootProject.ext.dependencies["logger"]
+    //glide
+    compile ("com.github.bumptech.glide:glide:4.7.1"){
+        exclude group: "com.android.support"
+    }
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    //butterKnife
+    compile rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    //Material Design
+    compile rootProject.ext.dependencies["design"]
+    //卡片式布局
+    compile rootProject.ext.dependencies["cardview-v7"]
+    compile rootProject.ext.dependencies["recyclerview-v7"]
 
-    compile 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

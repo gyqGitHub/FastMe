@@ -1,19 +1,15 @@
 package com.gyq.fast.gyq_common.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewStub;
-import android.widget.FrameLayout;
 
-import com.gyq.fast.gyq_common.R;
-import com.gyq.fast.gyq_common.configure.CommonBaseApplication;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 
 /**
  * Activity 基类
@@ -25,6 +21,7 @@ import com.gyq.fast.gyq_common.configure.CommonBaseApplication;
 
 public abstract class CommonBaseActivity extends AppCompatActivity {
     private Context mContext;
+    private  Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +33,10 @@ public abstract class CommonBaseActivity extends AppCompatActivity {
 
         setContentView(getContentViewId());
 
+        unbinder = ButterKnife.bind(this);
+        initData();
+        initView();
+
 
     }
 
@@ -43,7 +44,6 @@ public abstract class CommonBaseActivity extends AppCompatActivity {
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
     }
-
     public abstract int getContentViewId();
 
     public abstract void initView();
@@ -67,6 +67,7 @@ public abstract class CommonBaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unbinder.unbind();
     }
 
 }

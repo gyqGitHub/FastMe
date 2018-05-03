@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/action_index"
+        android:enabled="true"
+        android:icon="@drawable/index_icon_status_list"
+        android:title="首页"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_message"
+        android:enabled="true"
+        android:icon="@drawable/message"
+        android:title="信息"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_my"
+        android:enabled="true"
+        android:icon="@drawable/my"
+        android:title="我的"
+        app:showAsAction="ifRoom" />
+    </group>
+</menu>

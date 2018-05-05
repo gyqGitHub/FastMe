@@ -4,14 +4,21 @@
     android:id="@+id/ll_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
 
+    >
+
+    <!-- 添加ToolBar -->
+    <!--<include layout="@layout/toolbar"/>-->
+
+    <!--添加DrawerLayout-->
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/dl_main"
         android:layout_width="match_parent"
+
         android:layout_weight="1"
         android:layout_height="0dp">
-        <!-- 主内容 -->
+        <!-- 侧滑关闭时的主内容 -->
         <FrameLayout
             android:fitsSystemWindows="true"
             android:id="@+id/fl_content"
@@ -20,18 +27,19 @@
 
         </FrameLayout>
 
-        <!-- 侧滑菜单内容 -->
-        <!--<android.support.design.widget.NavigationView
+        <!-- 侧滑菜单内容 搭配 DrawerLayout 动态加 app:headerLayout="@layout/nav_header"-->
+        <android.support.design.widget.NavigationView
+            android:layout_marginRight="40dp"
             android:id="@+id/nv_left"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:headerLayout="@layout/nav_header"
-            app:menu="@menu/nav_menu"/>-->
+            app:menu="@menu/slide_memu"/>
 
 
     </android.support.v4.widget.DrawerLayout>
 
+    <!--底部导航栏 -->
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"

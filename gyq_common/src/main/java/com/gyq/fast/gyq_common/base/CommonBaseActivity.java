@@ -20,7 +20,7 @@ import butterknife.Unbinder;
  */
 
 public abstract class CommonBaseActivity extends AppCompatActivity {
-    private Context mContext;
+    public Context mContext;
     private  Unbinder unbinder;
 
     @Override

@@ -13,7 +13,7 @@ import android.support.v4.app.TaskStackBuilder;
 
 /**
 *前台服务
-*@author Created by gyq on 2018/3/6.
+*@author Created by gyq on 2018/beautifal_3/6.
 *@see 
 *@since 
 */

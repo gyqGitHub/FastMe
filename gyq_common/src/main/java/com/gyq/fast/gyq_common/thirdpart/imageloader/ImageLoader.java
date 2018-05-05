@@ -14,7 +14,11 @@ import android.widget.ImageView;
 */
 public class ImageLoader {
 
-    public void loadImage(Context context, String url, ImageView imageView){
+    public static void loadImage(Context context, String url, ImageView imageView){
         GlideApp.with(context).load(url).into(imageView);
+    }
+
+    public static void loadCircleImage(Context context, String url, ImageView imageView) {
+        GlideApp.with(context).load(url).circleCrop().into(imageView);
     }
 }
